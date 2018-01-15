@@ -5,6 +5,7 @@ from subprocess import call
 from pymesh import stl
 from heads import RoundHead, SquareHead
 from handles import RoundHandle, SquareHandle, TriangleHandle
+import lib
 from ipdb import set_trace as db
 
 
@@ -44,6 +45,13 @@ def generate_hammer(directory):
     handle_obj_fn = os.path.join(directory, handle_obj)
     head.save_obj(head_obj_fn)
     handle.save_obj(handle_obj_fn)
+
+    head_vertices, head_faces, _ = lib.read_mesh(head_obj_fn)
+    handle_vertices, handle_faces, _ = lib.read_mesh(handle_obj_fn)
+    head_com = lib.compute_centroid(head_vertices, head_faces)
+    handle_com = lib.compute_centroid(handle_vertices, handle_faces)
+    com = (head_com + handle_com) / 2
+
     with open(urdf_template_fn) as f:
         template = f.read()
 
@@ -55,7 +63,8 @@ def generate_hammer(directory):
                 mass=MASS, ixx=1e-3, ixy=0.,
                 ixz=0., iyy=1e-3, iyz=0.,
                 izz=1e-3, head_file=head_obj_fn,
-                handle_file=handle_obj_fn))
+                handle_file=handle_obj_fn,
+                cx=com[0], cy=com[1], cz=com[2]))
 
     # Clean up the temp files
     os.remove(temp_head_fn)
