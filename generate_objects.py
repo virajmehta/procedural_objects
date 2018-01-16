@@ -18,7 +18,7 @@ handle_obj = 'handle.obj'
 urdf_template_fn = 'template.urdf'
 hammer_urdf = 'hammer.urdf'
 scad_command = 'openscad -o {1} {0}'
-MASS=2.
+MASS=(0.75, 2.25)
 
 
 def generate_hammer(directory):
@@ -57,10 +57,11 @@ def generate_hammer(directory):
 
     # write URDF with meshes etc
     urdf_fn = os.path.join(directory, hammer_urdf)
+    mass = random.uniform(MASS[0], MASS[1])
     with open(urdf_fn, 'w') as f:
         f.write(template.format(
                 body_name='hammer',
-                mass=MASS, ixx=1e-3, ixy=0.,
+                mass=mass, ixx=1e-3, ixy=0.,
                 ixz=0., iyy=1e-3, iyz=0.,
                 izz=1e-3, head_file=head_obj_fn,
                 handle_file=handle_obj_fn,
