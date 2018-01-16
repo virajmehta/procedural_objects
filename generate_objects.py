@@ -13,6 +13,7 @@ head_stl_fn = 'head.stl'
 handle_stl_fn = 'handle.stl'
 head_obj = 'head.obj'
 handle_obj = 'handle.obj'
+hammer_obj = 'hammer.obj'
 urdf_template_fn = 'template.urdf'
 hammer_urdf = 'hammer.urdf'
 scad_command = 'openscad -o {1} {0}'
@@ -32,8 +33,11 @@ def generate_hammer(directory):
     handle = stl.Stl(handle_stl_fn)
     head_obj_fn = os.path.join(directory, head_obj)
     handle_obj_fn = os.path.join(directory, handle_obj)
+    hammer_obj_fn = os.path.join(directory, hammer_obj)
     head.save_obj(head_obj_fn)
     handle.save_obj(handle_obj_fn)
+    head.join(handle)
+    head.save_obj(hammer_obj_fn)
     with open(urdf_template_fn) as f:
         template = f.read()
     urdf_fn = os.path.join(directory, hammer_urdf)
