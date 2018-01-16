@@ -54,6 +54,7 @@ def generate_hammer(directory):
     handle_vertices, handle_faces, _ = lib.read_mesh(handle_obj_fn)
     head_com = lib.compute_centroid(head_vertices, head_faces)
     handle_com = lib.compute_centroid(handle_vertices, handle_faces)
+    # center of mass
     com = (head_com + handle_com) / 2
 
     with open(urdf_template_fn) as f:
@@ -65,9 +66,9 @@ def generate_hammer(directory):
     with open(urdf_fn, 'w') as f:
         f.write(template.format(
                 body_name='hammer',
-                mass=mass, ixx=1e-3, ixy=0.,
-                ixz=0., iyy=1e-3, iyz=0.,
-                izz=1e-3, head_file=head_obj_fn,
+                mass=mass, ixx=1, ixy=0.,
+                ixz=0., iyy=1, iyz=0.,
+                izz=1, head_file=head_obj_fn,
                 handle_file=handle_obj_fn,
                 cx=com[0], cy=com[1], cz=com[2]))
 
