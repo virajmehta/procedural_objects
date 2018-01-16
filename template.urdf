@@ -2,12 +2,13 @@
 <robot name="{body_name:s}">
   <link name="{body_name:s}">
     <contact>
-      <lateral_friction value="1.0"/>
-      <rolling_friction value="0.0"/>
+      <lateral_friction value="5.0"/>
+      <rolling_friction value="0.05"/>
+      <spinning_friction value="0.05"/>
       <inertia_scaling value="1.0"/>
     </contact>
     <inertial>
-      <origin rpy="0 0 0" xyz="0. 0. 0."/>
+      <origin rpy="0 0 0" xyz="{cx:.6f} {cy:.6f} {cz:.6f}"/>
        <mass value="{mass}"/>
        <inertia ixx="{ixx:.6f}" ixy="{ixy:.6f}" ixz="{ixz:.6f}" iyy="{iyy:.6f}" iyz="{iyz:.6f}" izz="{izz:.6f}"/>
     </inertial>

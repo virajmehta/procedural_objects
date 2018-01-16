@@ -6,4 +6,4 @@ class SquareHead(Part):
         self.scad = ' length = {0}; girth = {1}; translate([length / -2, girth / -2, 0.]) {{ cube([length, girth, girth]); }};'
 
     def get_random_scad(self):
-       return self.scad.format(random.uniform(12e-2, 20e-2), random.uniform(0.03, 0.08))
+       return self.scad.format(random.uniform(12e-2, 20e-2), random.uniform(0.03, 0.06))
