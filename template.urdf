@@ -3,8 +3,8 @@
   <link name="{body_name:s}">
     <contact>
       <lateral_friction value="5.0"/>
-      <rolling_friction value="0.05"/>
-      <spinning_friction value="0.05"/>
+      <rolling_friction value="0.005"/>
+      <spinning_friction value="0.005"/>
       <inertia_scaling value="1.0"/>
     </contact>
     <inertial>
