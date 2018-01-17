@@ -20,6 +20,8 @@ urdf_template_fn = 'template.urdf'
 hammer_urdf = 'hammer.urdf'
 scad_command = 'openscad -o {1} {0}'
 MASS=(0.75, 2.25)
+ROLL_SPIN_FRIC=(0.5e-3, 5e-3)
+LAT_FRIC=(3., 6.)
 
 
 def generate_hammer(directory):
@@ -62,15 +64,26 @@ def generate_hammer(directory):
 
     # write URDF with meshes etc
     urdf_fn = os.path.join(directory, hammer_urdf)
-    mass = random.uniform(MASS[0], MASS[1])
+    mass = random.uniform(*MASS)
+    lat_fric = random.uniform(*LAT_FRIC)
+    roll_spin_fric = random.uniform(*ROLL_SPIN_FRIC)
     with open(urdf_fn, 'w') as f:
         f.write(template.format(
                 body_name='hammer',
-                mass=mass, ixx=1, ixy=0.,
-                ixz=0., iyy=1, iyz=0.,
-                izz=1, head_file=head_obj_fn,
+                mass=mass,
+                ixx=1,
+                ixy=0.,
+                ixz=0.,
+                iyy=1,
+                iyz=0.,
+                izz=1,
+                head_file=head_obj_fn,
                 handle_file=handle_obj_fn,
-                cx=com[0], cy=com[1], cz=com[2]))
+                cx=com[0],
+                cy=com[1],
+                cz=com[2],
+                lat_fric=lat_fric,
+                roll_spin_fric=roll_spin_fric))
 
     # Clean up the temp files
     os.remove(temp_head_fn)

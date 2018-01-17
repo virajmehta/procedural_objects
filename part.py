@@ -1,6 +1,6 @@
 
 
-class Part():
+class Part(object):
     def __init__(self):
         pass
 

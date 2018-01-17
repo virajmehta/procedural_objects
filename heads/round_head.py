@@ -1,13 +1,24 @@
 import random
-from part import Part
+from heads import Head
 
-class RoundHead(Part):
-    def __init__(self):
+class RoundHead(Head):
+    def __init__(self,
+                 min_radius=1.5e-2,
+                 max_radius=4e-2,
+                 min_length=10e-2,
+                 max_length=20e-2,
+                 z_offset=0,
+                 constant_diameter_prob=0.7):
+        super(RoundHead, self).__init__(max_radius, min_radius, max_length, min_length, z_offset)
         self.scad = 'length = {0};translate([-length/2, 0., 0.]) {{ rotate(a=[0, 90, 0]) {{ cylinder(length, {1}, {2}, $fn=90); }} }};'
+        self.constant_diameter_prob = 0.7
+
     def get_random_scad(self):
-        if random.random() < 0.8:
-            r = random.uniform(0.015, 0.04)
-            return self.scad.format(random.uniform(10e-2, 20e-02), r, r)
-        return self.scad.format(random.uniform(10e-2, 20e-2), random.uniform(0.015, 0.04),
-                                random.uniform(0.015, 0.04))
+        length = random.uniform(self.min_length, self.max_length)
+        if random.random() < self.constant_diameter_prob:
+            radius = random.uniform(self.min_radius, self.max_radius)
+            return self.scad.format(length, radius, radius)
+        radius1 = random.uniform(self.min_radius, self.max_radius)
+        radius2 = random.uniform(self.min_radius, self.max_radius)
+        return self.scad.format(length, radius1, radius2)
 
