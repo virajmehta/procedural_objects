@@ -1,3 +1,27 @@
+'''
+Procedural Object Generation
+Viraj Mehta, 2018
+
+This program generates procedural objects as URDFs and objs
+for use in robot simulations.
+
+Invocation:
+python generate_objects.py (1) (2)
+
+(1): the directory in which to generate objects
+     it will be filled with numeric subdirectories which are self-referencing
+     URDFs, i.e. directory/1/hammer.urdf, directory/2/hammer.urdf, ...
+
+(2): the number of URDFs to generate
+
+Pipeline:
+1. random parts are chosen as heads and handles
+2. random parameters are sampled and .scad files are written that contain them
+3. Using OpenSCAD, these are compiled to .stl files.
+4. Using pymesh (the less nice version), these are turned into .obj files
+5. We compute the approximate centroid and sample random physical parameters
+6. This is all written as a URDF
+'''
 import sys
 import os
 import random
@@ -9,6 +33,7 @@ import lib
 from ipdb import set_trace as db
 
 
+# temporary filenames for the process
 temp_head_fn = 'head.scad'
 temp_handle_fn = 'handle.scad'
 head_stl_fn = 'head.stl'
@@ -25,6 +50,7 @@ LAT_FRIC=(3., 6.)
 
 
 def generate_hammer(directory):
+    directory = os.path.abspath(directory)
     # Sample heads and handles
     heads = [RoundHead(), SquareHead()]
     handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
