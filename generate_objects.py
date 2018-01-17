@@ -25,7 +25,7 @@ Pipeline:
 import sys
 import os
 import random
-from heads import RoundHead, SquareHead
+from heads import RoundHead, SquareHead, ConvexHead
 from handles import RoundHandle, SquareHandle, TriangleHandle
 import lib
 from ipdb import set_trace as db
@@ -41,11 +41,8 @@ ROLL_SPIN_FRIC=(0.5e-3, 5e-3)
 LAT_FRIC=(3., 6.)
 
 
-def generate_hammer(directory):
+def generate_hammer(directory, heads, handles):
     directory = os.path.abspath(directory)
-    # Sample heads and handles
-    heads = [RoundHead(), SquareHead()]
-    handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
     head = random.choice(heads)
     handle = random.choice(handles)
 
@@ -91,6 +88,10 @@ def generate_hammer(directory):
     return urdf_fn
 
 def generate_hammers(directory, num_hammers):
+    # Sample heads and handles
+    heads = [ConvexHead()]
+    #heads = [RoundHead(), SquareHead()]
+    handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
     dir_index = 0
     for i in range(num_hammers):
         while True:
@@ -100,7 +101,7 @@ def generate_hammers(directory, num_hammers):
                 continue
             os.mkdir(current_dir)
             break
-        generate_hammer(current_dir)
+        generate_hammer(current_dir, heads, handles)
 
 
 if __name__== '__main__':

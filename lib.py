@@ -74,3 +74,11 @@ def compute_centroid(vertices, triangles):
         total += area
     return centroid / (total * 3)
 
+def write_mesh(fn, vertices, faces):
+    with open(fn, 'w') as f:
+        for vertex in vertices:
+            f.write('v {0:.6f} {1:.6f} {2:.6f}\n'.format(vertex[0], vertex[1], vertex[2]))
+        for face in faces:
+            f.write('f {0:d} {1:d} {2:d}\n'.format(face[0], face[1], face[2]))
+
+
