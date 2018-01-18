@@ -5,7 +5,6 @@ import numpy as np
 from math import sqrt
 from heads import Head
 from lib import read_mesh, write_mesh
-from ipdb import set_trace as db
 
 
 
@@ -13,8 +12,8 @@ class ConvexHead(Head):
     def __init__(self,
                  min_radius=2e-2,
                  max_radius=5e-2,
-                 min_length=10e-2,
-                 max_length=20e-2,
+                 min_length=8e-2,
+                 max_length=15e-2,
                  z_offset=0,
                  mesh_glob='/cvgl2/u/virajm/robovat_grasp/data/simulation/tools/mpi-grasp/*/*.obj'):
         self.paths = [os.path.abspath(path) for path in glob.glob(mesh_glob) if 'vhacd' in path]

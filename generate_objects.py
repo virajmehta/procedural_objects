@@ -28,7 +28,6 @@ import random
 from heads import RoundHead, SquareHead, ConvexHead
 from handles import RoundHandle, SquareHandle, TriangleHandle
 import lib
-from ipdb import set_trace as db
 
 
 # temporary filenames for the process
