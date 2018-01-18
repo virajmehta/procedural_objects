@@ -89,8 +89,7 @@ def generate_hammer(directory, heads, handles):
 
 def generate_hammers(directory, num_hammers):
     # Sample heads and handles
-    heads = [ConvexHead()]
-    #heads = [RoundHead(), SquareHead()]
+    heads = [ConvexHead(), RoundHead, SquareHead()]
     handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
     dir_index = 0
     for i in range(num_hammers):
