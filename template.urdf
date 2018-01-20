@@ -18,7 +18,7 @@
         <mesh filename="{head_file:s}" scale="1. 1. 1."/>
       </geometry>
       <material name="color">
-        <color rgba="1 1 1 1"/>
+        <color rgba="0.533 0.561 0.702 1"/>
       </material>
     </visual>
     <visual>
@@ -27,7 +27,7 @@
         <mesh filename="{handle_file:s}" scale="1. 1. 1."/>
       </geometry>
       <material name="color">
-        <color rgba="1 1 1 1"/>
+        <color rgba="0.494 0.278 0.164 1"/>
       </material>
     </visual>
     <collision>
