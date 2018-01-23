@@ -1,6 +1,6 @@
 <?xml version="0.0" ?>
 <robot name="{body_name:s}">
-  <link name="{body_name:s}">
+  <link name="handle">
     <contact>
       <lateral_friction value="{lat_fric:.6f}"/>
       <rolling_friction value="{roll_spin_fric:.6f}"/>
@@ -8,8 +8,36 @@
       <inertia_scaling value="1.0"/>
     </contact>
     <inertial>
-      <origin rpy="0 0 0" xyz="{cx:.6f} {cy:.6f} {cz:.6f}"/>
-       <mass value="{mass}"/>
+      <origin rpy="0 0 0" xyz="{handle_cx:.6f} {handle_cy:.6f} {handle_cz:.6f}"/>
+       <mass value="{handle_mass}"/>
+       <inertia ixx="{ixx:.6f}" ixy="{ixy:.6f}" ixz="{ixz:.6f}" iyy="{iyy:.6f}" iyz="{iyz:.6f}" izz="{izz:.6f}"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="{handle_file:s}" scale="1. 1. 1."/>
+      </geometry>
+      <material name="brown">
+        <color rgba="0.494 0.278 0.164 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+            <mesh filename="{handle_file:s}" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="head">
+    <contact>
+      <lateral_friction value="{lat_fric:.6f}"/>
+      <rolling_friction value="{roll_spin_fric:.6f}"/>
+      <spinning_friction value="{roll_spin_fric:.6f}"/>
+      <inertia_scaling value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="{cx_head:.6f} {cy_head:.6f} {cz_head:.6f}"/>
+       <mass value="{head_mass}"/>
        <inertia ixx="{ixx:.6f}" ixy="{ixy:.6f}" ixz="{ixz:.6f}" iyy="{iyy:.6f}" iyz="{iyz:.6f}" izz="{izz:.6f}"/>
     </inertial>
     <visual>
@@ -17,17 +45,8 @@
       <geometry>
         <mesh filename="{head_file:s}" scale="1. 1. 1."/>
       </geometry>
-      <material name="color">
-        <color rgba="0.533 0.561 0.702 1"/>
-      </material>
-    </visual>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="{handle_file:s}" scale="1. 1. 1."/>
-      </geometry>
-      <material name="color">
-        <color rgba="0.494 0.278 0.164 1"/>
+      <material name="gray">
+        <color rgba="0.654 0.698 0.761 1"/>
       </material>
     </visual>
     <collision>
@@ -36,11 +55,9 @@
             <mesh filename="{head_file:s}" scale="1 1 1"/>
       </geometry>
     </collision>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-            <mesh filename="{handle_file:s}" scale="1 1 1"/>
-      </geometry>
-    </collision>
   </link>
+  <joint name="hammer_joint" type="fixed">
+    <parent link="handle"/>
+    <child link="head"/>
+  </joint>
 </robot>
