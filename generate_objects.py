@@ -69,7 +69,8 @@ def generate_hammer(directory, heads, handles):
     with open(urdf_fn, 'w') as f:
         f.write(template.format(
                 body_name='hammer',
-                mass=mass,
+                handle_mass = handle_mass
+                head_mass=head_mass,
                 ixx=1,
                 ixy=0.,
                 ixz=0.,
@@ -78,9 +79,12 @@ def generate_hammer(directory, heads, handles):
                 izz=1,
                 head_file=head_obj_fn,
                 handle_file=handle_obj_fn,
-                cx=com[0],
-                cy=com[1],
-                cz=com[2],
+                handle_cx=handle_com[0],
+                handle_cy=handle_com[1],
+                handle_cz=handle_com[2],
+                head_cx=head_com[0],
+                head_cy=head_com[1],
+                head_cz=head_com[2],
                 lat_fric=lat_fric,
                 roll_spin_fric=roll_spin_fric))
 
