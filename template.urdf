@@ -36,7 +36,7 @@
       <inertia_scaling value="1.0"/>
     </contact>
     <inertial>
-      <origin rpy="0 0 0" xyz="{cx_head:.6f} {cy_head:.6f} {cz_head:.6f}"/>
+      <origin rpy="0 0 0" xyz="{head_cx:.6f} {head_cy:.6f} {head_cz:.6f}"/>
        <mass value="{head_mass}"/>
        <inertia ixx="{ixx:.6f}" ixy="{ixy:.6f}" ixz="{ixz:.6f}" iyy="{iyy:.6f}" iyz="{iyz:.6f}" izz="{izz:.6f}"/>
     </inertial>

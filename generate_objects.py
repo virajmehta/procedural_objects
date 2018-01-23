@@ -35,7 +35,8 @@ head_obj = 'head.obj'
 handle_obj = 'handle.obj'
 urdf_template_fn = 'template.urdf'
 hammer_urdf = 'hammer.urdf'
-MASS=(0.75, 2.25)
+HEAD_MASS=(0.5, 1.)
+HANDLE_MASS=(0.25, 0.8)
 ROLL_SPIN_FRIC=(0.5e-3, 5e-3)
 LAT_FRIC=(3., 6.)
 
@@ -55,21 +56,20 @@ def generate_hammer(directory, heads, handles):
     handle_vertices, handle_faces, _ = lib.read_mesh(handle_obj_fn)
     head_com = lib.compute_centroid(head_vertices, head_faces)
     handle_com = lib.compute_centroid(handle_vertices, handle_faces)
-    # center of mass
-    com = (head_com + handle_com) / 2
 
     with open(urdf_template_fn) as f:
         template = f.read()
 
     # write URDF with meshes etc
     urdf_fn = os.path.join(directory, hammer_urdf)
-    mass = random.uniform(*MASS)
+    head_mass = random.uniform(*HEAD_MASS)
+    handle_mass = random.uniform(*HANDLE_MASS)
     lat_fric = random.uniform(*LAT_FRIC)
     roll_spin_fric = random.uniform(*ROLL_SPIN_FRIC)
     with open(urdf_fn, 'w') as f:
         f.write(template.format(
                 body_name='hammer',
-                handle_mass = handle_mass
+                handle_mass = handle_mass,
                 head_mass=head_mass,
                 ixx=1,
                 ixy=0.,
