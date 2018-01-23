@@ -16,4 +16,5 @@ class SquareHandle(Handle):
     def get_random_scad(self):
         length = random.uniform(self.min_length, self.max_length)
         square_side_length = random.uniform(self.min_square_side_length, self.max_square_side_length)
+        self.last_radius = square_side_length / sqrt(2)
         return self.scad.format(length, square_side_length)

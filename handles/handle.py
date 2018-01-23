@@ -8,3 +8,4 @@ class Handle(Part):
         self.min_radius = min_radius
         self.max_radius = max_radius
         self.scad = None
+        self.last_radius = None

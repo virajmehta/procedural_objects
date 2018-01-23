@@ -11,6 +11,7 @@ class Part(object):
         pass
 
     def get_random_scad(self):
+        assert False
         return ''
 
     def write_scad(self, fn):

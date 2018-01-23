@@ -16,7 +16,9 @@ class TriangleHandle(Handle):
         length = random.uniform(self.min_length, self.max_length)
         if random.random() < self.constant_diameter_prob:
             radius = random.uniform(self.min_radius, self.max_radius)
+            self.last_radius = radius
             return self.scad.format(length, radius, radius)
         radius1 = random.uniform(self.min_radius, self.max_radius)
         radius2 = random.uniform(self.min_radius, self.max_radius)
+        self.last_radius = radius2
         return self.scad.format(length, radius1, radius2)

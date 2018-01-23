@@ -25,7 +25,7 @@ Pipeline:
 import sys
 import os
 import random
-from heads import RoundHead, SquareHead, ConvexHead, BreadHead
+from heads import RoundHead, SquareHead, ConvexHead, BreadHead, StickHead
 from handles import RoundHandle, SquareHandle, TriangleHandle
 import lib
 
@@ -48,8 +48,15 @@ def generate_hammer(directory, heads, handles):
     # write OBJ from Part
     head_obj_fn = os.path.join(directory, head_obj)
     handle_obj_fn = os.path.join(directory, handle_obj)
+    if isinstance(head, StickHead):
+        # stick head needs different constraints
+        handle.max_length = 30e-2
+        handle.write_obj(handle_obj_fn)
+        handle.max_length = 37.5e-2
+        head.max_radius = handle.last_radius
+    else:
+        handle.write_obj(handle_obj_fn)
     head.write_obj(head_obj_fn)
-    handle.write_obj(handle_obj_fn)
 
     head_vertices, head_faces, _ = lib.read_mesh(head_obj_fn)
     handle_vertices, handle_faces, _ = lib.read_mesh(handle_obj_fn)
@@ -88,7 +95,7 @@ def generate_hammer(directory, heads, handles):
 
 def generate_hammers(directory, num_hammers):
     # Sample heads and handles
-    heads = [ConvexHead(), RoundHead(), SquareHead(), BreadHead()]
+    heads = [ConvexHead(), RoundHead(), SquareHead(), BreadHead(), StickHead()]
     handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
     dir_index = 0
     for i in range(num_hammers):
