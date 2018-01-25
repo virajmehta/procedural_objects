@@ -34,7 +34,6 @@ def read_mesh(obj_file):
         except Exception as e:
             print(e)
             pass
-    connections.reverse()
     toRead.close()
     return (np.array(vertices),np.array(connections),lines)
 
@@ -75,6 +74,7 @@ def compute_centroid(vertices, triangles):
     return centroid / (total * 3)
 
 def write_mesh(fn, vertices, faces):
+    faces += 1
     with open(fn, 'w') as f:
         for vertex in vertices:
             f.write('v {0:.6f} {1:.6f} {2:.6f}\n'.format(vertex[0], vertex[1], vertex[2]))
