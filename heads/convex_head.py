@@ -2,10 +2,8 @@ import os
 import random
 import glob
 import numpy as np
-from math import sqrt
 from heads import Head
 from lib import read_mesh, write_mesh
-
 
 
 class ConvexHead(Head):
@@ -15,9 +13,11 @@ class ConvexHead(Head):
                  min_length=8e-2,
                  max_length=15e-2,
                  z_offset=0,
-                 mesh_glob='/cvgl2/u/virajm/robovat_grasp/data/simulation/tools/mpi-grasp/*/*.obj'):
-        self.paths = [os.path.abspath(path) for path in glob.glob(mesh_glob) if 'vhacd' in path]
-        super(ConvexHead, self).__init__(max_radius, min_radius, max_length, min_length, z_offset)
+                 mesh_glob='/cvgl2/u/virajm/robovat_grasp/data/simulation/tools/mpi-grasp/*/*.obj'): # NOQA
+        self.paths = [os.path.abspath(path) for path in glob.glob(mesh_glob)
+                      if 'vhacd' in path]
+        super(ConvexHead, self).__init__(max_radius, min_radius, max_length,
+                                         min_length, 0, z_offset)
 
     def get_random_scad(self):
         return ''
