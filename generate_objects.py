@@ -35,14 +35,15 @@ head_obj = 'head.obj'
 handle_obj = 'handle.obj'
 urdf_template_fn = 'template.urdf'
 hammer_urdf = 'hammer.urdf'
-HEAD_MASS=(0.5, 1.)
-HANDLE_MASS=(0.25, 0.8)
-ROLL_SPIN_FRIC=(0.5e-3, 5e-3)
-LAT_FRIC=(3., 6.)
+HEAD_MASS = (0.8, 1.4)
+HANDLE_MASS = (0.5, 1.1)
+ROLL_SPIN_FRIC = (0.5e-3, 5e-3)
+LAT_FRIC = (3., 6.)
 
 
 def generate_hammer(directory, heads, handles):
     directory = os.path.abspath(directory)
+    print('generating hammer in %s' % (directory))
     head = random.choice(heads)
     handle = random.choice(handles)
 
@@ -64,12 +65,12 @@ def generate_hammer(directory, heads, handles):
     urdf_fn = os.path.join(directory, hammer_urdf)
     head_mass = random.uniform(*HEAD_MASS)
     handle_mass = random.uniform(*HANDLE_MASS)
-    lat_fric = random.uniform(*LAT_FRIC)
-    roll_spin_fric = random.uniform(*ROLL_SPIN_FRIC)
+    lat_fric = 0.2  # random.uniform(*LAT_FRIC)
+    roll_spin_fric = 0.2  # random.uniform(*ROLL_SPIN_FRIC)
     with open(urdf_fn, 'w') as f:
         f.write(template.format(
                 body_name='hammer',
-                handle_mass = handle_mass,
+                handle_mass=handle_mass,
                 head_mass=head_mass,
                 ixx=1,
                 ixy=0.,
@@ -77,8 +78,8 @@ def generate_hammer(directory, heads, handles):
                 iyy=1,
                 iyz=0.,
                 izz=1,
-                head_file=head_obj_fn,
-                handle_file=handle_obj_fn,
+                head_file=os.path.basename(head_obj_fn),
+                handle_file=os.path.basename(handle_obj_fn),
                 handle_cx=handle_com[0],
                 handle_cy=handle_com[1],
                 handle_cz=handle_com[2],
@@ -89,6 +90,7 @@ def generate_hammer(directory, heads, handles):
                 roll_spin_fric=roll_spin_fric))
 
     return urdf_fn
+
 
 def generate_hammers(directory, num_hammers):
     # Sample heads and handles
@@ -106,6 +108,6 @@ def generate_hammers(directory, num_hammers):
         generate_hammer(current_dir, heads, handles)
 
 
-if __name__== '__main__':
+if __name__ == '__main__':
     generate_hammers(sys.argv[1], int(sys.argv[2]))
 

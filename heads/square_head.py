@@ -5,7 +5,7 @@ from heads import Head
 class SquareHead(Head):
     def __init__(self,
                  min_radius=2e-2,
-                 max_radius=5e-2,
+                 max_radius=3.5e-2,
                  min_length=10e-2,
                  max_length=20e-2,
                  z_offset=0):

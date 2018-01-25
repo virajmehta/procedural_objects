@@ -1,9 +1,8 @@
-<?xml version="0.0" ?>
+<?xml version="1.0" ?>
 <robot name="{body_name:s}">
   <link name="handle">
     <contact>
       <lateral_friction value="{lat_fric:.6f}"/>
-      <rolling_friction value="{roll_spin_fric:.6f}"/>
       <spinning_friction value="{roll_spin_fric:.6f}"/>
       <inertia_scaling value="1.0"/>
     </contact>
@@ -31,7 +30,6 @@
   <link name="head">
     <contact>
       <lateral_friction value="{lat_fric:.6f}"/>
-      <rolling_friction value="{roll_spin_fric:.6f}"/>
       <spinning_friction value="{roll_spin_fric:.6f}"/>
       <inertia_scaling value="1.0"/>
     </contact>

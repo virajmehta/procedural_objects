@@ -4,7 +4,7 @@ from heads import Head
 class RoundHead(Head):
     def __init__(self,
                  min_radius=1.5e-2,
-                 max_radius=4e-2,
+                 max_radius=3e-2,
                  min_length=10e-2,
                  max_length=20e-2,
                  z_offset=0,
