@@ -10,9 +10,12 @@ class RoundHead(Head):
                  max_length=20e-2,
                  max_tilt=20,
                  z_offset=0,
-                 constant_diameter_prob=0.7):
+                 constant_diameter_prob=0.7,
+                 is_L=False,
+                 is_X=False):
         super(RoundHead, self).__init__(max_radius, min_radius, max_length,
-                                        min_length, max_tilt, z_offset)
+                                        min_length, max_tilt, z_offset,
+                                        is_L, is_X)
         self.scad = 'length = {0};rotate(a=[0,{3},0]) {{translate([-length/2, 0., 0.]) {{ rotate(a=[0, 90, 0]) {{ cylinder(length, {1}, {2}, $fn=90); }} }} }};'  # NOQA
         self.constant_diameter_prob = constant_diameter_prob
 

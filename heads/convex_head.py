@@ -17,7 +17,7 @@ class ConvexHead(Head):
         self.paths = [os.path.abspath(path) for path in glob.glob(mesh_glob)
                       if 'vhacd' in path]
         super(ConvexHead, self).__init__(max_radius, min_radius, max_length,
-                                         min_length, 0, z_offset)
+                                         min_length, 0, z_offset, False, False)
 
     def get_random_scad(self):
         return ''
