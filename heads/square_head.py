@@ -11,9 +11,12 @@ class SquareHead(Head):
                  max_length=20e-2,
                  max_tilt=20,
                  z_offset=0,
-                 no_tilt_prob=0.7):
-        super(SquareHead, self).__init__(max_radius, min_radius, max_length, 
-                                         min_length, max_tilt, z_offset)
+                 no_tilt_prob=0.7,
+                 is_L=False,
+                 is_X=False)
+        super(SquareHead, self).__init__(max_radius, min_radius, max_length,
+                                         min_length, max_tilt, z_offset,
+                                         is_L, is_X)
         self.scad = ' length = {0}; girth = {1}; rotate(a=[0,{2},0]){{translate([length / -2, girth / -2, 0.]) {{ cube([length, girth, girth]); }} }};'  # NOQA
         self.min_square_side_length = sqrt(2) * min_radius
         self.max_square_side_length = sqrt(2) * max_radius

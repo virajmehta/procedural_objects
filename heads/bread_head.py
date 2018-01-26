@@ -10,9 +10,12 @@ class BreadHead(Head):
                  max_length=20e-2,
                  max_tilt=20,
                  z_offset=0,
-                 no_tilt_prob=0.7):
+                 no_tilt_prob=0.7,
+                 is_L=False,
+                 is_X=False):
         super(BreadHead, self).__init__(max_radius, min_radius, max_length,
-                                        min_length, max_tilt, z_offset)
+                                        min_length, max_tilt, z_offset, is_L,
+                                        is_X)
         self.no_tilt_prob = no_tilt_prob
         self.scad = 'l = {0}; w = {1}; rotate(a=[0,{2},0]){{rotate(a=[90,0,0]){{translate([0,0, - l/2]){{linear_extrude(height=l, $fn=60) {{ translate([0, w/2.6, 0]) {{ circle(w/2); }} translate([-w/2, -w/2, 0]) {{ square(w); }} }} }} }} }}' # NOQA
 
