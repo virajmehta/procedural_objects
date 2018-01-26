@@ -6,13 +6,15 @@ This program generates procedural objects as URDFs and objs
 for use in robot simulations.
 
 Invocation:
-python generate_objects.py (1) (2)
+python generate_objects.py (1) (2) (3?)
 
 (1): the directory in which to generate objects
      it will be filled with numeric subdirectories which are self-referencing
      URDFs, i.e. directory/1/hammer.urdf, directory/2/hammer.urdf, ...
 
 (2): the number of URDFs to generate
+
+(3)(optional): a string in ('L', 'T', 'X', 'C') which enforces a given topology of hammer
 
 Pipeline:
 1. random parts are chosen as heads and handles
@@ -92,9 +94,19 @@ def generate_hammer(directory, heads, handles):
     return urdf_fn
 
 
-def generate_hammers(directory, num_hammers):
+def generate_hammers(directory, num_hammers, object_type=None):
     # Sample heads and handles
-    heads = [ConvexHead(), RoundHead(), SquareHead(), BreadHead()]
+    assert object_type in ('C', 'L', 'X', 'T', None)
+    if object_type == 'C':
+        heads = [ConvexHead()]
+    elif object_type == 'L':
+        heads = [RoundHead(is_L=True), SquareHead(is_L=True), BreadHead(is_L=True)]
+    elif object_type == 'X':
+        heads = [RoundHead(is_X=True), SquareHead(is_X=True), BreadHead(is_X=True)]
+    else:
+        heads = [RoundHead(), SquareHead(), BreadHead()]
+
+    # heads = [ConvexHead(), RoundHead(), SquareHead(), BreadHead()]
     handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
     dir_index = 0
     for i in range(num_hammers):
@@ -109,5 +121,8 @@ def generate_hammers(directory, num_hammers):
 
 
 if __name__ == '__main__':
-    generate_hammers(sys.argv[1], int(sys.argv[2]))
+    if len(sys.argv) > 3:
+        generate_hammers(*sys.argv[1:4])
+    else:
+        generate_hammers(*sys.argv[1:3])
 
