@@ -5,9 +5,9 @@ from handles import Handle
 class TriangleHandle(Handle):
     def __init__(self,
                  min_length=12e-2,
-                 max_length=37.5e-2,
+                 max_length=28e-2,
                  min_radius=1e-2,
-                 max_radius=3e-2,
+                 max_radius=2.5e-2,
                  constant_diameter_prob=0.7):
         super(TriangleHandle, self).__init__(min_length, max_length, min_radius,
                                              max_radius)
