@@ -14,7 +14,8 @@ python generate_objects.py (1) (2) (3?)
 
 (2): the number of URDFs to generate
 
-(3)(optional): a string in ('L', 'T', 'X', 'C') which enforces a given topology of hammer
+(3)(optional): a string in ('L', 'T', 'X', 'C') which enforces a given topology 
+               of hammer
 
 Pipeline:
 1. random parts are chosen as heads and handles
@@ -101,13 +102,14 @@ def generate_hammers(directory, num_hammers, object_type=None):
     if object_type == 'C':
         heads = [ConvexHead()]
     elif object_type == 'L':
-        heads = [RoundHead(is_L=True), SquareHead(is_L=True), BreadHead(is_L=True)]
+        heads = [RoundHead(is_L=True), SquareHead(is_L=True),
+                 BreadHead(is_L=True), ConvexHead(is_L=True)]
     elif object_type == 'X':
-        heads = [RoundHead(is_X=True), SquareHead(is_X=True), BreadHead(is_X=True)]
+        heads = [RoundHead(is_X=True), SquareHead(is_X=True),
+                 BreadHead(is_X=True), ConvexHead(is_X=True)]
     else:
-        heads = [RoundHead(), SquareHead(), BreadHead()]
+        heads = [RoundHead(), SquareHead(), BreadHead(), ConvexHead()]
 
-    # heads = [ConvexHead(), RoundHead(), SquareHead(), BreadHead()]
     handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
     dir_index = 0
     for i in range(num_hammers):
