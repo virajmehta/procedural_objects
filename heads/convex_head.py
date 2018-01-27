@@ -33,10 +33,9 @@ class ConvexHead(Head):
         diffs = max_coordinates - min_coordinates
 
         # scale to make sure the length is in bounds
-        if np.max(diffs) > self.max_length:
-            vertices *= (self.max_length / np.max(diffs))
-        elif np.max(diffs) < self.min_length:
-            vertices *= (self.min_length / np.max(diffs))
+        if np.max(diffs) > self.max_length or np.max(diffs) < self.min_length:
+            vertices *= (random.uniform(self.min_length, self.max_length) /
+                         np.max(diffs))
         # make sure x is the most variant axis and z is least(hack)
         vertices = vertices[:, np.argsort(diffs)[::-1]]
         z_diff = np.max(vertices[:, 2]) - np.min(vertices[:, 2])

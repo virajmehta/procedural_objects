@@ -29,7 +29,7 @@ import sys
 import os
 import random
 from heads import RoundHead, SquareHead, ConvexHead, BreadHead
-from handles import RoundHandle, SquareHandle, TriangleHandle
+from handles import RoundHandle, SquareHandle, TriangleHandle, ConvexHandle
 import lib
 
 
@@ -110,7 +110,7 @@ def generate_hammers(directory, num_hammers, object_type=None):
     else:
         heads = [RoundHead(), SquareHead(), BreadHead(), ConvexHead()]
 
-    handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
+    handles = [RoundHandle(), SquareHandle(), TriangleHandle(), ConvexHandle()]
     dir_index = 0
     for i in range(num_hammers):
         while True:
