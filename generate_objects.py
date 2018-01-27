@@ -95,6 +95,7 @@ def generate_hammer(directory, heads, handles):
 
 
 def generate_hammers(directory, num_hammers, object_type=None):
+    num_hammers = int(num_hammers)
     # Sample heads and handles
     assert object_type in ('C', 'L', 'X', 'T', None)
     if object_type == 'C':
