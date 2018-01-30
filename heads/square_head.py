@@ -35,7 +35,6 @@ class SquareHead(Head):
             roll = random.uniform(-self.max_tilt, self.max_tilt)
         if self.is_L:
             x_offset = (length / 2) - 3e-2
-            tilt = 0
         if self.is_X:
             z_offset = random.uniform(-15e-2, 0)
         return self.scad.format(length, square_side_length, tilt, x_offset,

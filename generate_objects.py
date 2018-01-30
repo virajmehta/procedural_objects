@@ -6,7 +6,7 @@ This program generates procedural objects as URDFs and objs
 for use in robot simulations.
 
 Invocation:
-python generate_objects.py (1) (2) (3?)
+python generate_objects.py (1) (2) (3?) (4?)
 
 (1): the directory in which to generate objects
      it will be filled with numeric subdirectories which are self-referencing
@@ -14,8 +14,14 @@ python generate_objects.py (1) (2) (3?)
 
 (2): the number of URDFs to generate
 
-(3)(optional): a string in ('L', 'T', 'X', 'C') which enforces a given topology 
+(3)(optional): a string in ('L', 'T', 'X') which enforces a given topology 
                of hammer
+(4)(optional): a string in ('E', 'M', 'H') which enforces a difficulty level as
+               defined below
+
+E(asy): parametric object and handle
+M(edium): parametric handle, convex head
+H(ard): convex handle, convex head
 
 Pipeline:
 1. random parts are chosen as heads and handles
@@ -95,22 +101,27 @@ def generate_hammer(directory, heads, handles):
     return urdf_fn
 
 
-def generate_hammers(directory, num_hammers, object_type=None):
+def generate_hammers(directory, num_hammers, object_type=None, difficulty=None):
     num_hammers = int(num_hammers)
     # Sample heads and handles
-    assert object_type in ('C', 'L', 'X', 'T', None)
-    if object_type == 'C':
-        heads = [ConvexHead()]
-    elif object_type == 'L':
-        heads = [RoundHead(is_L=True), SquareHead(is_L=True),
-                 BreadHead(is_L=True), ConvexHead(is_L=True)]
-    elif object_type == 'X':
-        heads = [RoundHead(is_X=True), SquareHead(is_X=True),
-                 BreadHead(is_X=True), ConvexHead(is_X=True)]
+    assert object_type in ('L', 'X', 'T', None)
+    assert difficulty in ('E', 'M', 'H', None)
+    is_L = object_type == 'L'
+    is_X = object_type == 'X'
+    if difficulty == 'E':
+        heads = [RoundHead(is_L=is_L, is_X=is_X), SquareHead(is_L=is_L,
+                 is_X=is_X), BreadHead(is_L=is_L, is_X=is_X)]
+        handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
+    elif difficulty == 'M':
+        heads = [ConvexHead(is_L=is_L, is_X=is_X)]
+        handles = [RoundHandle(), SquareHandle(), TriangleHandle()]
+    elif difficulty == 'H':
+        heads = [ConvexHead(is_L=is_L, is_X=is_X)]
+        handles = [ConvexHandle()]
     else:
         heads = [RoundHead(), SquareHead(), BreadHead(), ConvexHead()]
-
-    handles = [RoundHandle(), SquareHandle(), TriangleHandle(), ConvexHandle()]
+        handles = [RoundHandle(), SquareHandle(), TriangleHandle(),
+                   ConvexHandle()]
     dir_index = 0
     for i in range(num_hammers):
         while True:
@@ -124,8 +135,12 @@ def generate_hammers(directory, num_hammers, object_type=None):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 3:
-        generate_hammers(*sys.argv[1:4])
-    else:
+    if len(sys.argv) == 3:
         generate_hammers(*sys.argv[1:3])
+    elif len(sys.argv) == 4:
+        generate_hammers(*sys.argv[1:4])
+    elif len(sys.argv) == 5:
+        generate_hammers(*sys.argv[1:5])
+    else:
+        raise Exception('nope')
 

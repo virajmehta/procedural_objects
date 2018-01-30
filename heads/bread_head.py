@@ -17,7 +17,7 @@ class BreadHead(Head):
                                         max_length, max_tilt, z_offset, is_L,
                                         is_X)
         self.no_tilt_prob = no_tilt_prob
-        self.scad = 'l = {0}; w = {1}; translate([0, {3}, {4}]) {{rotate(a=[{5},{2},0]){{rotate(a=[90,0,0]){{translate([0,0, - l/2]){{linear_extrude(height=l, $fn=60) {{ translate([0, w/2.6, 0]) {{ circle(w/2); }} translate([-w/2, -w/2, 0]) {{ square(w); }} }} }} }} }} }};' # NOQA 
+        self.scad = 'l = {0}; w = {1}; translate([{3}, 0, {4}]) {{rotate(a=[{5},{2},0]){{rotate(a=[0,90,0]){{translate([0,0, - l/2]){{linear_extrude(height=l, $fn=60) {{ translate([-w/2.6,0,0]) {{ circle(w/2); }} translate([-w/2, -w/2, 0]) {{ square(w); }} }} }} }} }} }};' # NOQA 
 
     def get_random_scad(self):
         length = random.uniform(self.min_length, self.max_length)

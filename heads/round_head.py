@@ -30,7 +30,6 @@ class RoundHead(Head):
             tilt = random.uniform(-self.max_tilt, self.max_tilt)
         if self.is_L:
             x_offset = (length / 2) - 3e-2
-            tilt = 0
         if self.is_X:
             z_offset = random.uniform(-15e-2, 0)
         radius1 = random.uniform(self.min_radius, self.max_radius)
