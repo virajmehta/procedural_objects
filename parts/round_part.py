@@ -10,7 +10,7 @@ class RoundPart(Part):
                  min_depth,
                  max_depth,
                  constant_diameter_prob=0.7):
-        super(RoundHandle, self).__init__(min_length, max_length, min_width, max_width,
+        super(RoundPart, self).__init__(min_length, max_length, min_width, max_width,
                                           min_depth, max_depth)
         self.scad = 'translate([0,0, -{0}]) {{\n cylinder({0}, {1}, {2}, $fn=64);\n }};'
         self.constant_diameter_prob = constant_diameter_prob
