@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<robot name="{body_name:s}">
+{links:s}
+{joints:s}
+</robot>

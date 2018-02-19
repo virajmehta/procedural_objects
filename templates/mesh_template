@@ -1,0 +1,27 @@
+  <link name="{name:s}">
+    <contact>
+      <lateral_friction value="{lat_fric:.6f}"/>
+      <spinning_friction value="{roll_spin_fric:.6f}"/>
+      <inertia_scaling value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="{roll:.6f} {pitch:.6f} {yaw:.6f}" xyz="{cx:.6f} {cy:.6f} {cz:.6f}"/>
+       <mass value="{mass}"/>
+       <inertia ixx="{ixx:.6f}" ixy="{ixy:.6f}" ixz="{ixz:.6f}" iyy="{iyy:.6f}" iyz="{iyz:.6f}" izz="{izz:.6f}"/>
+    </inertial>
+    <visual>
+      <origin rpy="{roll:.6f} {pitch:.6f} {yaw:.6f}" xyz="{x:.6f} {y:.6f} {z:.6f}"/>
+      <geometry>
+        <mesh filename="{filename:s}" scale="1. 1. 1."/>
+      </geometry>
+      <material name="color">
+        <color rgba="{red:.3f} {green:.3f} {blue:.3f}1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="{roll:.6f} {pitch:.6f} {yaw:.6f}" xyz="{x:.6f} {y:.6f} {z:.6f}"/>
+      <geometry>
+            <mesh filename="{filenam:s}" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
