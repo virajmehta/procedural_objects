@@ -2,11 +2,11 @@ import os
 import random
 import glob
 import numpy as np
-from handles import Handle
+from parts import Part
 from lib import read_mesh, write_mesh
 
 
-class ConvexHandle(Handle):
+class ConvexPart(Part):
     def __init__(self,
                  min_radius=2e-2,
                  max_radius=4e-2,

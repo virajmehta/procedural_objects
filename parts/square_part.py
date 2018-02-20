@@ -12,7 +12,7 @@ class SquarePart(Part):
                  max_depth):
         super(SquarePart, self).__init__(min_length, max_length, min_width, max_width,
                                           min_depth, max_depth)
-        self.scad = 'thickness = {1};\n translate([thickness / -2, thickness / -2, -{0}]) {{\n cube([thickness, thickness, {0}]);\n }};'
+        self.scad = 'thickness = {1}; cube([thickness, thickness, {0}], center=true);'
 
     def get_random_scad(self):
         self.depth = random.uniform(self.min_depth, self.max_depth)
