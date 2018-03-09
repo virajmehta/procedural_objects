@@ -28,6 +28,7 @@ class Part(object):
         self.length = None
         self.width = None
         self.depth = None
+        self.fn = None
 
     def get_random_scad(self):
         return ''
@@ -40,6 +41,7 @@ class Part(object):
 
     # can be overwritten
     def write_obj(self, fn):
+        self.fn = fn
         temp_scad_fn = '%d.scad' % random.randint(0, 10000000000)
         temp_stl_fn = '%d.stl' % random.randint(0, 1000000000)
         self.write_scad(temp_scad_fn)

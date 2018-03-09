@@ -24,6 +24,7 @@ class ConvexPart(Part):
         return ''
 
     def write_obj(self, fn):
+        self.fn = fn
         path = random.choice(self.paths)
         vertices, faces, _ = read_mesh(path)
         min_coordinates = np.min(vertices, axis=0)

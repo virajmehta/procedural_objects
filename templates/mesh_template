@@ -7,7 +7,7 @@
     <inertial>
       <origin rpy="{roll:.6f} {pitch:.6f} {yaw:.6f}" xyz="{cx:.6f} {cy:.6f} {cz:.6f}"/>
        <mass value="{mass}"/>
-       <inertia ixx="{ixx:.6f}" ixy="{ixy:.6f}" ixz="{ixz:.6f}" iyy="{iyy:.6f}" iyz="{iyz:.6f}" izz="{izz:.6f}"/>
+       <inertia ixx=1 ixy=0 ixz=0 iyy=1 iyz=0 izz=1/>
     </inertial>
     <visual>
       <origin rpy="{roll:.6f} {pitch:.6f} {yaw:.6f}" xyz="{x:.6f} {y:.6f} {z:.6f}"/>
@@ -21,7 +21,7 @@
     <collision>
       <origin rpy="{roll:.6f} {pitch:.6f} {yaw:.6f}" xyz="{x:.6f} {y:.6f} {z:.6f}"/>
       <geometry>
-            <mesh filename="{filenam:s}" scale="1 1 1"/>
+            <mesh filename="{filename:s}" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
