@@ -7,7 +7,7 @@ class SquarePart(Part):
                  min_length,
                  max_length,
                  min_width,
-                 min_width,
+                 max_width,
                  min_depth,
                  max_depth):
         super(SquarePart, self).__init__(min_length, max_length, min_width, max_width,

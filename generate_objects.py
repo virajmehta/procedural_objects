@@ -14,7 +14,7 @@ python generate_objects.py (1) (2) (3?) (4?)
 
 (2): the number of URDFs to generate
 
-(3)(optional): a string in ('L', 'T', 'X') which enforces a given topology 
+(3)(optional): a string in ('L', 'T', 'X') which enforces a given topology
                of hammer
 (4)(optional): a string in ('E', 'M', 'H') which enforces a difficulty level as
                defined below
@@ -34,8 +34,7 @@ Pipeline:
 import sys
 import os
 import random
-from heads import RoundHead, SquareHead, ConvexHead, BreadHead
-from handles import RoundHandle, SquareHandle, TriangleHandle, ConvexHandle
+from objects import TObject
 import lib
 
 
@@ -50,6 +49,7 @@ ROLL_SPIN_FRIC = (0.5e-3, 5e-3)
 LAT_FRIC = (3., 6.)
 
 
+'''
 def generate_hammer(directory, heads, handles):
     directory = os.path.abspath(directory)
     print('generating hammer in %s' % (directory))
@@ -99,9 +99,11 @@ def generate_hammer(directory, heads, handles):
                 roll_spin_fric=roll_spin_fric))
 
     return urdf_fn
+'''
 
 
-def generate_hammers(directory, num_hammers, object_type=None, difficulty=None):
+def generate_hammers(directory, num_hammers, object_type=None,
+                     difficulty=None):
     num_hammers = int(num_hammers)
     # Sample heads and handles
     assert object_type in ('L', 'X', 'T', None)
@@ -134,7 +136,31 @@ def generate_hammers(directory, num_hammers, object_type=None, difficulty=None):
         generate_hammer(current_dir, heads, handles)
 
 
+def generate_object(directory):
+    path = os.path.join(directory, 'object.urdf')
+    objects = [TObject()]
+    obj = random.choice(objects)
+    obj.generate_urdf(path)
+
+
+
+def generate_objects(directory, num_objects):
+    num_objects = int(num_objects)
+    dir_index = 0
+    for i in range(num_objects):
+        while True:
+            current_dir = os.path.join(directory, str(dir_index))
+            if os.path.exists(current_dir):
+                dir_index += 1
+                continue
+            os.mkdir(current_dir)
+            break
+        generate_object(current_dir)
+
+
+
 if __name__ == '__main__':
+    '''
     if len(sys.argv) == 3:
         generate_hammers(*sys.argv[1:3])
     elif len(sys.argv) == 4:
@@ -143,4 +169,5 @@ if __name__ == '__main__':
         generate_hammers(*sys.argv[1:5])
     else:
         raise Exception('nope')
-
+    '''
+    generate_objects(*sys.argv[1:])

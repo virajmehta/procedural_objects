@@ -23,7 +23,7 @@ class TrianglePart(Part):
         if random.random() < self.constant_diameter_prob:
             radius = random.uniform(min_radius, max_radius)
             self.width = radius * 1.5
-            self.length = radius. * 1.5
+            self.length = radius * 1.5
             return self.scad.format(self.depth, radius, radius)
         radius1 = random.uniform(min_radius, max_radius)
         radius2 = random.uniform(min_radius, max_radius)
