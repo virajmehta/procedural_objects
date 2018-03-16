@@ -1,4 +1,4 @@
   <joint name="{child_name:s}_joint" type="fixed">
     <parent link="{parent_name:s}"/>
-    <child link="{child_name:s}}"/>
+    <child link="{child_name:s}"/>
   </joint>

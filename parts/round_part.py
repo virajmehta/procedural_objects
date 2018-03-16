@@ -14,12 +14,11 @@ class RoundPart(Part):
                                           min_depth, max_depth)
         self.scad = 'translate([0,0, -{0} / 2.]) {{\n cylinder({0}, {1}, {2}, $fn=64);\n }};'
         self.constant_diameter_prob = constant_diameter_prob
-        self.radius = None
 
     def get_random_scad(self):
         length = random.uniform(self.min_depth, self.max_depth)
         min_radius = self.min_length / 2.
-        max_radius = self.max_radius / 2.
+        max_radius = self.max_length / 2.
 
         if random.random() < self.constant_diameter_prob:
             radius = random.uniform(min_radius, max_radius)
@@ -30,4 +29,5 @@ class RoundPart(Part):
         radius2 = random.uniform(min_radius, max_radius)
         self.width = max(radius1, radius2) * 2
         self.length = self.width
+        self.depth = length
         return self.scad.format(length, radius1, radius2)

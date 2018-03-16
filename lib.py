@@ -1,5 +1,23 @@
 import numpy as np
 
+def get_com(fn):
+    vertices, faces, _ = read_mesh(fn)
+    return compute_centroid(vertices, faces)
+
+# roll then pitch then yaw then translate
+def transform_point(point, roll, pitch, yaw, x, y, z):
+    roll = np.deg2rad(roll)
+    pitch = np.deg2rad(pitch)
+    yaw = np.deg2rad(yaw)
+    roll_mat = np.array([[1, 0, 0],[0, np.cos(roll), -np.sin(roll)],[0, np.sin(roll), np.cos(roll)]])
+    pitch_mat = np.array([[np.cos(pitch), 0, np.sin(pitch)],[0,1,0],[-np.sin(pitch),0,np.cos(pitch)]])
+    yaw_mat = np.array([[np.cos(yaw),-np.sin(yaw),0],[np.sin(yaw),np.cos(yaw),0],[0,0,1]])
+    point = roll_mat.dot(point)
+    point = pitch_mat.dot(point)
+    point = yaw_mat.dot(point)
+    point += np.array([x,y,z])
+    return point
+
 def read_mesh(obj_file):
     vertices = []
     connections = []

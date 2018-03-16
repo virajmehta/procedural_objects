@@ -29,4 +29,4 @@ class TrianglePart(Part):
         radius2 = random.uniform(min_radius, max_radius)
         self.width = max(radius1, radius2) * 1.5
         self.length = self.width
-        return self.scad.format(length, radius1, radius2)
+        return self.scad.format(self.length, radius1, radius2)
