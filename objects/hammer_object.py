@@ -22,15 +22,14 @@ class HammerObject(Object):
 
     HEAD_MASS = (0.8, 1.4)
     HANDLE_MASS = (0.5, 1.1)
-    COLOR = (0.5,0.5,0.5)
     def __init__(self, parts=None, tilt_prob=0.7, max_tilt=20):
         super(HammerObject, self).__init__([])
-        self.handle_parts = [# ConvexPart(min_length=MIN_HANDLE_LENGTH,
-                                        # max_length=MAX_HANDLE_LENGTH,
-                                        # min_width=3e-2,
-                                        # max_width=6e-2,
-                                        # min_depth=3e-2,
-                                        # max_depth=6e-2),
+        self.handle_parts = [ConvexPart(min_length=MIN_HANDLE_LENGTH,
+                                        max_length=MAX_HANDLE_LENGTH,
+                                        min_width=3e-2,
+                                        max_width=6e-2,
+                                        min_depth=3e-2,
+                                        max_depth=6e-2),
                              RoundPart(min_length=MIN_HANDLE_LENGTH,
                                        max_length=MAX_HANDLE_LENGTH,
                                        min_width=MIN_HANDLE_WIDTH,
@@ -55,12 +54,12 @@ class HammerObject(Object):
                                         max_width=MAX_HANDLE_WIDTH,
                                         min_depth=MIN_HANDLE_DEPTH,
                                         max_depth=MAX_HANDLE_DEPTH)]
-        self.head_parts = [# ConvexPart(min_length=8e-2,
-                                        # max_length=15e-2,
-                                        # min_width=4e-2,
-                                        # max_width=8e-2,
-                                        # min_depth=4e-2,
-                                        # max_depth=8e-2),
+        self.head_parts = [ConvexPart(min_length=8e-2,
+                                      max_length=15e-2,
+                                      min_width=4e-2,
+                                      max_width=8e-2,
+                                      min_depth=4e-2,
+                                      max_depth=8e-2),
                              RoundPart(min_length=MIN_HEAD_LENGTH,
                                        max_length=MAX_HEAD_LENGTH,
                                        min_width=MIN_HEAD_WIDTH,
