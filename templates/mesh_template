@@ -15,7 +15,7 @@
         <mesh filename="{filename:s}" scale="1. 1. 1."/>
       </geometry>
       <material name="color">
-        <color rgba="{red:.3f} {green:.3f} {blue:.3f}1"/>
+        <color rgba="{red:.3f} {green:.3f} {blue:.3f} 1"/>
       </material>
     </visual>
     <collision>

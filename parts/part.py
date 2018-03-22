@@ -4,7 +4,7 @@ aligned with the center exactly at the origin.
 '''
 import os
 from subprocess import call
-from pymesh import stl
+import trimesh
 import random
 
 
@@ -46,8 +46,8 @@ class Part(object):
         temp_stl_fn = '%d.stl' % random.randint(0, 1000000000)
         self.write_scad(temp_scad_fn)
         call(scad_command.format(temp_scad_fn, temp_stl_fn), shell=True)
-        part = stl.Stl(temp_stl_fn)
-        part.save_obj(fn)
+        part = trimesh.load(temp_stl_fn)
+        part.export(fn, 'obj')
         os.remove(temp_scad_fn)
         os.remove(temp_stl_fn)
 

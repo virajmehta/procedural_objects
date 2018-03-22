@@ -24,6 +24,7 @@ class RoundPart(Part):
             radius = random.uniform(min_radius, max_radius)
             self.width = radius * 2.
             self.length = radius * 2.
+            self.depth = length
             return self.scad.format(self.depth, radius, radius)
         radius1 = random.uniform(min_radius, max_radius)
         radius2 = random.uniform(min_radius, max_radius)
